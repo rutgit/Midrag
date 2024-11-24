@@ -1,0 +1,6 @@
+@Midrag_HostAddress = http://localhost:5120
+
+GET {{Midrag_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
