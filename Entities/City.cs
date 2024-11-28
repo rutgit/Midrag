@@ -12,8 +12,8 @@ namespace Entities
     {
         [Key, NotNull]
         public int Id { get; set; }
-        public DateTime CreateTime { get; set; }
-        public DateTime UpdateTime { get; set; }
+        public DateTime CreateTime { get; set; } = DateTime.Now;
+        public DateTime UpdateTime { get; set; } = DateTime.Now;
         public string? CityName { get; set; }
         public int AreaId { get; set; }
         public Area? Area { get; set; }

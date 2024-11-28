@@ -7,8 +7,8 @@ namespace Entities
     {
         [Key, NotNull]
         public int Id { get; set; }
-        public DateTime CreateTime { get; set; }
-        public DateTime UpdateTime { get; set; }
+        public DateTime CreateTime { get; set; } = DateTime.Now;
+        public DateTime UpdateTime { get; set; } = DateTime.Now;
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Email { get; set; }

@@ -12,8 +12,8 @@ namespace Entities
     {
         [Key, NotNull]
         public int Id { get; set; }
-        public DateTime CreateTime { get; set; }
-        public DateTime UpdateTime { get; set; }
+        public DateTime CreateTime { get; set; } = DateTime.Now;
+        public DateTime UpdateTime { get; set; } = DateTime.Now;
         public int FieldId { get; set; }
         public Field? Field { get; set; }
         public string SubFieldName { get; set; }

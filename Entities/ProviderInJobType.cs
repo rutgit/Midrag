@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    internal class ProviderInJobType
+    public class ProviderInJobType
     {
         [Key, NotNull]
         public int Id { get; set; }

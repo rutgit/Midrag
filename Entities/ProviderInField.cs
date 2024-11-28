@@ -16,6 +16,8 @@ namespace Entities
         public DateTime UpdateTime { get; set; }
         public int ProviderId { get; set; }
         public Provider? Provider { get; set; }
+        public int FieldId { get; set; }
+        public Field? Field { get; set; }
         public int NumOfRanks { get; set; }
         public int OveralAverage { get; set; }
         public int QualityAverage { get; set; }
