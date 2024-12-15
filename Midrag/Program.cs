@@ -29,6 +29,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+                  builder =>
+                  {
+                      builder.WithOrigins("http://localhost:4200",
+                                           "development web site")
+                                          .AllowAnyHeader()
+                                          .AllowAnyMethod()
+                                          ;
+                  });
+
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -60,8 +74,9 @@ else
     app.UseHsts();  // HTTP Strict Transport Security for production
 }
 
-app.UseHttpsRedirection();   
 
+app.UseHttpsRedirection();
+app.UseCors("CorsPolicy");
 //app.UseStaticFiles();
 
 app.UseAuthorization();
