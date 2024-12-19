@@ -17,13 +17,12 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 // Add services to the container.
-builder.Services.AddScoped<IHomePageRepository,HomePageRepository>();
-builder.Services.AddScoped<IHomePageService,HomePageService>();
+builder.Services.AddScoped<IHomePageRepository, HomePageRepository>();
+builder.Services.AddScoped<IHomePageService, HomePageService>();
 
 builder.Services.AddDbContext<MidragContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MidragConnection"),
     b => b.MigrationsAssembly("Midrag")));
-
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -32,16 +31,14 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy",
-                  builder =>
-                  {
-                      builder.WithOrigins("http://localhost:4200",
-                                           "development web site")
-                                          .AllowAnyHeader()
-                                          .AllowAnyMethod()
-                                          ;
-                  });
-
+        policyBuilder =>
+        {
+            policyBuilder.WithOrigins(builder.Configuration.GetSection("Cors:AllowedOrigions").Get<string[]>())
+                         .AllowAnyHeader()
+                         .AllowAnyMethod();
+        });
 });
+
 
 var app = builder.Build();
 
@@ -66,18 +63,19 @@ else
                 Log.Error(exception, "An unhandled exception occurred.");
             }
 
-            context.Response.StatusCode = 500; 
+            context.Response.StatusCode = 500;
             await context.Response.WriteAsync("An unexpected error occurred. Please try again later.");
         });
     });
 
-    app.UseHsts();  // HTTP Strict Transport Security for production
+    app.UseHsts();
 }
 
-
 app.UseHttpsRedirection();
+
 app.UseCors("CorsPolicy");
-//app.UseStaticFiles();
+
+// app.UseStaticFiles();
 
 app.UseAuthorization();
 

@@ -11,8 +11,8 @@ namespace DataRepository
 
         public HomePageRepository(MidragContext midragContext, ILogger<MidragContext> logger)
         {
-            this._midragContext = midragContext; // ?? throw new ArgumentNullException(nameof(midragContext));
-            _logger = logger;
+            this._midragContext = midragContext ?? throw new ArgumentNullException(nameof(midragContext));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public async Task<List<Category>> GetCategoriesAsync()
@@ -23,7 +23,7 @@ namespace DataRepository
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while getting the list of fields.");
+                _logger.LogError(ex, "An error occurred while getting the list of categories.");
                 return new List<Category>();
             }
         }
@@ -54,7 +54,7 @@ namespace DataRepository
             }
         }
 
-        public async Task<int> GetTotalFeedbacksForField(int fieldId)
+        public async Task<int?> GetTotalFeedbacksForField(int fieldId)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace DataRepository
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while getting total feedbacks for fieldId {FieldId}", fieldId);
-                return 0; 
+                return null;
             }
         }
     }

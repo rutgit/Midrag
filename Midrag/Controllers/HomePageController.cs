@@ -72,7 +72,7 @@ namespace Midrag.Controllers
         /// <param name="fieldId">The ID of the field for which total feedbacks are being retrieved.</param>
         /// <returns>The total number of feedbacks for the specified field. Returns a 500 status if an error occurs.</returns>
         [HttpGet("fields/{fieldId}/feedbacks")]
-        public async Task<ActionResult<int>> GetTotalFeedbacksForField(int fieldId)
+        public async Task<ActionResult<int?>> GetTotalFeedbacksForField(int fieldId)
         {
             try
             {
